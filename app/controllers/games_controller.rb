@@ -18,6 +18,23 @@ class GamesController < ApplicationController
 
     input_guess = params[:user_guess].to_i
 
+
+    if input_guess > winning_number
+      output_message = "Try Lower"
+    elsif input_guess < winning_number
+      output_message = "Go Higher"
+    else
+      output_message = "You Win!!!!"
+    end
+
+    render json: {guess: input_guess, message: output_message}
+  end
+
+  def guess_segment_action
+    winning_number = 42
+
+    input_guess = params[:segment_guess].to_i
+
     if input_guess > winning_number
       output_message = "Try Lower"
     elsif input_guess < winning_number
